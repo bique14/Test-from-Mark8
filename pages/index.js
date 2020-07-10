@@ -1,16 +1,17 @@
 import { useState } from "react";
-import Table from '../components/Table'
-import UploadForm from '../components/UploadForm'
+import Table from "../components/Table";
+import UploadForm from "../components/UploadForm";
 
-function UseStateExample() {
+function Mark8() {
   const [count, setCount] = useState(0);
+  const [data, setData] = useState([]);
 
   return (
-    <div className="" >
-      <UploadForm />
-      <Table />
+    <div className="">
+      <UploadForm setData={setData}/>
+      <Table data={data}/>
     </div>
   );
 }
 
-export default UseStateExample;
+export default Mark8;

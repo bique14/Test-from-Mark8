@@ -18,43 +18,48 @@ function SummaryTable() {
 function TableItem() {
   return (
     <table className="w-full text-left">
-      <tr className="border text-gray-500 text-xs">
-        <th></th>
-        <th>CONDO NAME</th>
-        <th>RENT PRICE (Baht)</th>
-        <th>SELL PRICE (Baht)</th>
-        <th>BEDROOM</th>
-        <th>BATHROOM</th>
-        <th>SIZE (sqm.)</th>
-        <th>FLOOR</th>
-        <th>STATUS</th>
-        <th>PHOTO</th>
-        <th>TITLE</th>
-        <th>DESCRIPTION</th>
-        <th>BENEFIT</th>
-        <th>Amenities</th>
-      </tr>
-      <tr>
-        <td className="text-center">1</td>
-        <td>CONDO NAME</td>
-        <td>RENT PRICE (Baht)</td>
-        <td>SELL PRICE (Baht)</td>
-        <td>BEDROOM</td>
-        <td>BAtdROOM</td>
-        <td>SIZE (sqm.)</td>
-        <td>FLOOR</td>
-        <td>STATUS</td>
-        <td>PHOTO</td>
-        <td>TITLE</td>
-        <td>DESCRIPTION</td>
-        <td>BENEFIT</td>
-        <td>Amenities</td>
-      </tr>
+      <thead>
+        <tr className="border text-gray-500 text-xs">
+          <th></th>
+          <th>CONDO NAME</th>
+          <th>RENT PRICE (Baht)</th>
+          <th>SELL PRICE (Baht)</th>
+          <th>BEDROOM</th>
+          <th>BATHROOM</th>
+          <th>SIZE (sqm.)</th>
+          <th>FLOOR</th>
+          <th>STATUS</th>
+          <th>PHOTO</th>
+          <th>TITLE</th>
+          <th>DESCRIPTION</th>
+          <th>BENEFIT</th>
+          <th>Amenities</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td className="text-center">1</td>
+          <td>CONDO NAME</td>
+          <td>RENT PRICE (Baht)</td>
+          <td>SELL PRICE (Baht)</td>
+          <td>BEDROOM</td>
+          <td>BAtdROOM</td>
+          <td>SIZE (sqm.)</td>
+          <td>FLOOR</td>
+          <td>STATUS</td>
+          <td>PHOTO</td>
+          <td>TITLE</td>
+          <td>DESCRIPTION</td>
+          <td>BENEFIT</td>
+          <td>Amenities</td>
+        </tr>
+      </tbody>
     </table>
   );
 }
 
-function Table() {
+function Table({ data }) {
+  console.log(data);
   return (
     <div>
       table
