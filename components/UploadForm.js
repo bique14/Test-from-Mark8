@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Papa from "papaparse";
 
 function UploadFormHeader() {
   return (
@@ -21,7 +22,16 @@ function UploadFormHeader() {
   );
 }
 
-function UploadFormInput() {
+function readFile(file, setData) {
+  Papa.parse(file, {
+    header: true,
+    complete: function (result) {
+      setData(result.data);
+    },
+  });
+}
+
+function UploadFormInput({ setData }) {
   const [fileName, setFileName] = useState("");
 
   return (
@@ -37,13 +47,16 @@ function UploadFormInput() {
           </label>
           <div className="flex flex-col text-sm ml-4">
             <span className="font-bold">via CSV file</span>
-            <span>{!!fileName ? fileName : "อัปเดตข้อมูลจากไฟล์ CSV" }</span>
+            <span>{!!fileName ? fileName : "อัปเดตข้อมูลจากไฟล์ CSV"}</span>
             <input
               className="hidden"
               id="upload-file"
               type="file"
               accept=".csv"
-              onChange={(event) => setFileName(event.target.files[0].name)}
+              onChange={(event) => {
+                readFile(event.target.files[0], setData);
+                setFileName(event.target.files[0].name);
+              }}
             />
           </div>
         </div>
@@ -52,11 +65,11 @@ function UploadFormInput() {
   );
 }
 
-function UploadForm() {
+function UploadForm({ setData }) {
   return (
     <div className="w-3/5 m-auto rounded bg-white border my-10">
       <UploadFormHeader />
-      <UploadFormInput />
+      <UploadFormInput setData={setData} />
     </div>
   );
 }
