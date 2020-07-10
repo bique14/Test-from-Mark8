@@ -2,7 +2,7 @@ function SummaryTable() {
   return (
     <div className="flex flex-row border-t justify-between">
       <div className="flex flex-row text-xl">
-        <h1 className="inline-block bg-gray-300 p-4">38</h1>
+        <h1 className="inline-block bg-gray-300 p-4">0</h1>
         <span className="flex font-bold items-center ml-4">
           listings successfully and Ready to published
         </span>
@@ -15,58 +15,85 @@ function SummaryTable() {
   );
 }
 
-function TableItem() {
+function TableHeader() {
   return (
-    <table className="w-full text-left">
-      <thead>
-        <tr className="border text-gray-500 text-xs">
-          <th></th>
-          <th>CONDO NAME</th>
-          <th>RENT PRICE (Baht)</th>
-          <th>SELL PRICE (Baht)</th>
-          <th>BEDROOM</th>
-          <th>BATHROOM</th>
-          <th>SIZE (sqm.)</th>
-          <th>FLOOR</th>
-          <th>STATUS</th>
-          <th>PHOTO</th>
-          <th>TITLE</th>
-          <th>DESCRIPTION</th>
-          <th>BENEFIT</th>
-          <th>Amenities</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td className="text-center">1</td>
-          <td>CONDO NAME</td>
-          <td>RENT PRICE (Baht)</td>
-          <td>SELL PRICE (Baht)</td>
-          <td>BEDROOM</td>
-          <td>BAtdROOM</td>
-          <td>SIZE (sqm.)</td>
-          <td>FLOOR</td>
-          <td>STATUS</td>
-          <td>PHOTO</td>
-          <td>TITLE</td>
-          <td>DESCRIPTION</td>
-          <td>BENEFIT</td>
-          <td>Amenities</td>
-        </tr>
-      </tbody>
-    </table>
+    <thead>
+      <tr className="border text-gray-500 text-xs whitespace-no-wrap">
+        <th></th>
+        <th>CONDO NAME</th>
+        <th>RENT PRICE (Baht)</th>
+        <th>SELL PRICE (Baht)</th>
+        <th>BEDROOM</th>
+        <th>BATHROOM</th>
+        <th>SIZE (sqm.)</th>
+        <th>FLOOR</th>
+        <th>STATUS</th>
+        <th>PHOTO</th>
+        <th>TITLE</th>
+        <th>DESCRIPTION</th>
+        <th>BENEFIT</th>
+        <th>Amenities</th>
+      </tr>
+    </thead>
+  );
+}
+
+function TableItem({ data }) {
+  return (
+    <tr className="border-b text-sm">
+      <td className="text-center text-gray-500">{data["id"]}</td>
+      <td className="ellipsis" style={{ maxWidth: "18rem" }}>
+        {data["condo_name-EN"]}
+      </td>
+      <td>
+        {data["rent_price"]}
+        <span className="text-gray-400">/month</span>
+      </td>
+      <td>{data["sale_price"]}</td>
+      <td>{data["bedroom"]}</td>
+      <td>{data["bath"]}</td>
+      <td>{data["size (sq.m)"]}</td>
+      <td>{data["floor"]}</td>
+      <td className="text-red-500">STATUS</td>
+      <td className="text-red-500">PHOTO</td>
+      <td className="ellipsis" style={{ maxWidth: "10rem" }}>
+        {data["title"]}
+      </td>
+      <td className="ellipsis" style={{ maxWidth: "10rem" }}>
+        {data["description"]}
+      </td>
+      <td className="text-red-500">BENEFIT</td>
+      <td className="text-red-500">Amenities</td>
+    </tr>
+  );
+}
+
+function TableList({ data }) {
+  console.log("64", data);
+  const items = data.map((d) => <TableItem key={d.id} data={d} />);
+
+  return (
+    <div className="overflow-x-auto">
+      <table className="w-full text-left">
+        <TableHeader />
+        <tbody>{items}</tbody>
+      </table>
+    </div>
   );
 }
 
 function Table({ data }) {
-  console.log(data);
   return (
-    <div>
-      table
+    <div className="bg-white">
       <SummaryTable />
-      <TableItem />
+      <TableList data={data} />
     </div>
   );
+}
+
+function ellipsis(n, limit) {
+  const c = n.length > limit ? n.substring(0, limit) + "..." : n;
+  return c;
 }
 
 export default Table;
