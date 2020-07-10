@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 function UploadFormHeader() {
   return (
     <div className="border-b">
@@ -20,17 +22,29 @@ function UploadFormHeader() {
 }
 
 function UploadFormInput() {
+  const [fileName, setFileName] = useState("");
+
   return (
     <div className="p-4">
       <div className="text-xl flex flex-col">
         <h1 className="text-gray-900 font-bold">Choose your an input method</h1>
         <div className="flex border rounded p-4 mt-2">
-          <button className="flex justify-center items-center bg-gray-200 rounded w-12">
+          <label
+            className="flex justify-center items-center bg-gray-200 rounded w-12 cursor-pointer"
+            htmlFor="upload-file"
+          >
             +
-          </button>
+          </label>
           <div className="flex flex-col text-sm ml-4">
             <span className="font-bold">via CSV file</span>
-            <span>อัปเดตข้อมูลจากไฟล์ CSV</span>
+            <span>{!!fileName ? fileName : "อัปเดตข้อมูลจากไฟล์ CSV" }</span>
+            <input
+              className="hidden"
+              id="upload-file"
+              type="file"
+              accept=".csv"
+              onChange={(event) => setFileName(event.target.files[0].name)}
+            />
           </div>
         </div>
       </div>
