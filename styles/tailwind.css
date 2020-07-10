@@ -19,3 +19,11 @@ html {
 #__next {
   @apply h-full;
 }
+
+th {
+  font-weight: 400;
+}
+
+th, td {
+  padding: 1rem;
+}
