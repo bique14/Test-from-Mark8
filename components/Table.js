@@ -109,7 +109,7 @@ function TableItem({ data }) {
       photos.push(
         <img
           key={i}
-          className="inline-block rounded h-10 w-10 mr-1"
+          className="inline-block rounded-lg h-8 w-8 mr-1"
           src={src}
         ></img>
       );
@@ -142,8 +142,9 @@ function TableItem({ data }) {
         {agentPost(data["agent_post"])}
         {acceptAgent(data["accept_agent"])}
       </td>
-      <td className="whitespace-no-wrap text-red-500">
+      <td className="whitespace-no-wrap text-red-500 photo">
         {photo(data["photo1"])}
+        <span className="inline-block text-blue-500 ml-1 w-20 cursor-pointer"></span>
       </td>
       <td className="ellipsis" style={{ maxWidth: "10rem" }}>
         {validateString(data["title"])}

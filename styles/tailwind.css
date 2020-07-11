@@ -46,6 +46,11 @@ td {
 .btn-remove:hover span {
   display: none;
 }
+
 .btn-remove:hover:before {
   content: "X";
+}
+
+.photo:hover span::before {
+  content: "Edit photo";
 }
