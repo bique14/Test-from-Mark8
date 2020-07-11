@@ -39,28 +39,56 @@ function TableHeader() {
 }
 
 function TableItem({ data }) {
+  const validateRowClass = (d) =>
+    !!d["id"] &&
+    !!d["condo_name-EN"] &&
+    !!d["rent_price"] &&
+    !!d["sale_price"] &&
+    !!d["bedroom"] &&
+    !!d["bath"] &&
+    !!d["size (sq.m)"] &&
+    !!d["floor"] &&
+    !!d["title"] &&
+    !!d["description"]
+      ? "text-center text-gray-500"
+      : "bg-red-500 text-white rounded";
+
+  const validateString = (str) =>
+    !!str ? str : <span className="text-red-500">not found</span>;
+
+  const rentPrice = (price) =>
+    price == "0" ? (
+      "-"
+    ) : !!price ? (
+      <span>
+        {price}
+        <span className="text-gray-400">/month</span>
+      </span>
+    ) : (
+      "-"
+    );
+
+  const salePrice = (price) => (price == "0" ? "-" : !!price ? price : "-");
+
   return (
     <tr className="border-b text-sm">
-      <td className="text-center text-gray-500">{data["id"]}</td>
+      <td className={validateRowClass(data)}>{validateString(data["id"])}</td>
       <td className="ellipsis" style={{ maxWidth: "18rem" }}>
-        {data["condo_name-EN"]}
+        {validateString(data["condo_name-EN"])}
       </td>
-      <td>
-        {data["rent_price"]}
-        <span className="text-gray-400">/month</span>
-      </td>
-      <td>{data["sale_price"]}</td>
-      <td>{data["bedroom"]}</td>
-      <td>{data["bath"]}</td>
-      <td>{data["size (sq.m)"]}</td>
-      <td>{data["floor"]}</td>
+      <td>{rentPrice(data["rent_price"])}</td>
+      <td>{salePrice(data["sale_price"])}</td>
+      <td>{validateString(data["bedroom"])}</td>
+      <td>{validateString(data["bath"])}</td>
+      <td>{validateString(data["size (sq.m)"])}</td>
+      <td>{validateString(data["floor"])}</td>
       <td className="text-red-500">STATUS</td>
       <td className="text-red-500">PHOTO</td>
       <td className="ellipsis" style={{ maxWidth: "10rem" }}>
-        {data["title"]}
+        {validateString(data["title"])}
       </td>
       <td className="ellipsis" style={{ maxWidth: "10rem" }}>
-        {data["description"]}
+        {validateString(data["description"])}
       </td>
       <td className="text-red-500">BENEFIT</td>
       <td className="text-red-500">Amenities</td>
