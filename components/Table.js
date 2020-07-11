@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 function SummaryTable() {
   return (
     <div className="flex flex-row border-t justify-between">
@@ -38,7 +40,17 @@ function TableHeader() {
   );
 }
 
+const BENEFITS = [
+  "ห้องใหม่เอี่ยม",
+  "เจ้าของขายเอง",
+  "วิวสวย ริมแม่น้ำ",
+  "วิวทางด่วน",
+  "สระว่ายน้ำสวย",
+];
+
 function TableItem({ data }) {
+  const [benefitSelected, setBenefit] = useState("");
+
   const validateRowClass = (d) =>
     !!d["id"] &&
     !!d["condo_name-EN"] &&
@@ -88,6 +100,27 @@ function TableItem({ data }) {
       <span className="hidden"></span>
     );
 
+  const photo = (src) => {
+    const photos = [];
+    for (let i = 0; i < 4; i++) {
+      photos.push(
+        <img
+          key={i}
+          className="inline-block rounded h-10 w-10 mr-1"
+          src={src}
+        ></img>
+      );
+    }
+    return photos;
+  };
+
+  const optionBenefits = (benefits) =>
+    benefits.map((b, i) => (
+      <option key={i} value={b}>
+        {b}
+      </option>
+    ));
+
   return (
     <tr className="border-b text-sm">
       <td className={validateRowClass(data)}>
@@ -106,14 +139,25 @@ function TableItem({ data }) {
         {agentPost(data["agent_post"])}
         {acceptAgent(data["accept_agent"])}
       </td>
-      <td className="text-red-500">PHOTO</td>
+      <td className="whitespace-no-wrap text-red-500">
+        {photo(data["photo1"])}
+      </td>
       <td className="ellipsis" style={{ maxWidth: "10rem" }}>
         {validateString(data["title"])}
       </td>
       <td className="ellipsis" style={{ maxWidth: "10rem" }}>
         {validateString(data["description"])}
       </td>
-      <td className="text-red-500">BENEFIT</td>
+      <td>
+        <select
+          value={benefitSelected}
+          onChange={(event) => {
+            setBenefit(event.target.value);
+          }}
+        >
+          {optionBenefits(BENEFITS)}
+        </select>
+      </td>
       <td className="text-red-500">Amenities</td>
     </tr>
   );
