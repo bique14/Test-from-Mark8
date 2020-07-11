@@ -70,6 +70,24 @@ function TableItem({ data }) {
 
   const salePrice = (price) => (price == "0" ? "-" : !!price ? price : "-");
 
+  const agentPost = (bool) =>
+    bool == "TRUE" ? (
+      <span className="inline-block bg-green-200 text-green-600 rounded-full px-3 py-1 mr-1">
+        Agent post
+      </span>
+    ) : (
+      <span className="hidden"></span>
+    );
+
+  const acceptAgent = (bool) =>
+    bool == "TRUE" ? (
+      <span className="inline-block bg-yellow-200 text-yellow-600 rounded-full px-3 py-1">
+        รับ Co-Agent
+      </span>
+    ) : (
+      <span className="hidden"></span>
+    );
+
   return (
     <tr className="border-b text-sm">
       <td className={validateRowClass(data)}>{validateString(data["id"])}</td>
@@ -82,7 +100,10 @@ function TableItem({ data }) {
       <td>{validateString(data["bath"])}</td>
       <td>{validateString(data["size (sq.m)"])}</td>
       <td>{validateString(data["floor"])}</td>
-      <td className="text-red-500">STATUS</td>
+      <td className="whitespace-no-wrap text-xs">
+        {agentPost(data["agent_post"])}
+        {acceptAgent(data["accept_agent"])}
+      </td>
       <td className="text-red-500">PHOTO</td>
       <td className="ellipsis" style={{ maxWidth: "10rem" }}>
         {validateString(data["title"])}
@@ -97,7 +118,6 @@ function TableItem({ data }) {
 }
 
 function TableList({ data }) {
-  console.log("64", data);
   const items = data.map((d) => <TableItem key={d.id} data={d} />);
 
   return (
