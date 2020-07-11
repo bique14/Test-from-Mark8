@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar";
-import "../styles/tailwind.css";
+import "../styles/main.css";
 
 export default function MyApp({ Component, pageProps }) {
   return (

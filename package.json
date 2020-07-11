@@ -1,5 +1,5 @@
 {
-  "homepage": "ttps://bique14.github.io/Test-from-Mark8",
+  "homepage": "https://bique14.github.io/Test-from-Mark8",
   "name": "mark8-cart",
   "version": "1.0.0",
   "description": "",
@@ -19,11 +19,11 @@
   },
   "scripts": {
     "dev": "next",
-    "watch:css": "postcss src/styles/tailwind.css -o src/styles/main.css --watch",
-    "build:css": "postcss src/styles/tailwind.css -o src/styles/main.css",
+    "watch:css": "postcss styles/tailwind.css -o styles/main.css --watch",
+    "build:css": "npx tailwindcss build styles/tailwind.css -o styles/main.css",
     "build": "next build",
     "export": "next export",
-    "deploy": "next build && next export && gh-pages -d out -t true",
+    "deploy": "npm run build:css && next build && next export && gh-pages -d out -t true",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

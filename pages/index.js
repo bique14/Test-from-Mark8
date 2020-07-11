@@ -7,7 +7,7 @@ function Mark8() {
   const [data, setData] = useState([]);
 
   return (
-    <div className="">
+    <div>
       <UploadForm setData={setData}/>
       <Table data={data}/>
     </div>
