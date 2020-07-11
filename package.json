@@ -1,4 +1,5 @@
 {
+  "homepage": "ttps://bique14.github.io/Test-from-Mark8",
   "name": "mark8-cart",
   "version": "1.0.0",
   "description": "",
@@ -12,12 +13,17 @@
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
+    "gh-pages": "^3.1.0",
     "postcss-preset-env": "^6.7.0",
     "tailwindcss": "^1.4.6"
   },
   "scripts": {
     "dev": "next",
     "watch:css": "postcss src/styles/tailwind.css -o src/styles/main.css --watch",
+    "build:css": "postcss src/styles/tailwind.css -o src/styles/main.css",
+    "build": "next build",
+    "export": "next export",
+    "deploy": "next build && next export && gh-pages -d out -t true",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
