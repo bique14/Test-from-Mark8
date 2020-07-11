@@ -1,10 +1,20 @@
 import { useState } from "react";
 
-function SummaryTable() {
+const BENEFITS = [
+  "ห้องใหม่เอี่ยม",
+  "เจ้าของขายเอง",
+  "วิวสวย ริมแม่น้ำ",
+  "วิวทางด่วน",
+  "สระว่ายน้ำสวย",
+];
+
+function SummaryTable({ data }) {
+  const filtered = data.filter((d) => validateRowClass(d) !== "btn-remove").length;
+
   return (
     <div className="flex flex-row border-t justify-between">
       <div className="flex flex-row text-xl">
-        <h1 className="inline-block bg-gray-300 p-4">0</h1>
+        <h1 className="inline-block bg-gray-300 p-4">{filtered}</h1>
         <span className="flex font-bold items-center ml-4">
           listings successfully and Ready to published
         </span>
@@ -40,19 +50,8 @@ function TableHeader() {
   );
 }
 
-const BENEFITS = [
-  "ห้องใหม่เอี่ยม",
-  "เจ้าของขายเอง",
-  "วิวสวย ริมแม่น้ำ",
-  "วิวทางด่วน",
-  "สระว่ายน้ำสวย",
-];
-
-function TableItem({ data }) {
-  const [benefitSelected, setBenefit] = useState("");
-
-  const validateRowClass = (d) =>
-    !!d["id"] &&
+function validateRowClass(d) {
+  return !!d["id"] &&
     !!d["condo_name-EN"] &&
     !!d["rent_price"] &&
     !!d["sale_price"] &&
@@ -62,8 +61,12 @@ function TableItem({ data }) {
     !!d["floor"] &&
     !!d["title"] &&
     !!d["description"]
-      ? "text-center text-gray-500"
-      : "btn-remove";
+    ? "text-center text-gray-500"
+    : "btn-remove";
+}
+
+function TableItem({ data }) {
+  const [benefitSelected, setBenefit] = useState("");
 
   const validateString = (str) =>
     !!str ? str : <span className="text-red-500">not found</span>;
@@ -179,7 +182,7 @@ function TableList({ data }) {
 function Table({ data }) {
   return (
     <div className="bg-white">
-      <SummaryTable />
+      <SummaryTable data={data} />
       <TableList data={data} />
     </div>
   );
