@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 const BENEFITS = [
+  "-",
   "ห้องใหม่เอี่ยม",
   "เจ้าของขายเอง",
   "วิวสวย ริมแม่น้ำ",
@@ -9,7 +10,8 @@ const BENEFITS = [
 ];
 
 function SummaryTable({ data }) {
-  const filtered = data.filter((d) => validateRowClass(d) !== "btn-remove").length;
+  const filtered = data.filter((d) => validateRowClass(d) !== "btn-remove")
+    .length;
 
   return (
     <div className="flex flex-row border-t justify-between">
@@ -124,6 +126,24 @@ function TableItem({ data }) {
       </option>
     ));
 
+  const amenities = {
+    Aircon: data["Aircon"],
+    "Bath tub": data["Bath tub"],
+    "Electric stove": data["Electric stove"],
+    Furniture: data["Furniture"],
+    "Gas stove": data["Gas stove"],
+    Refrigerator: data["Refrigerator"],
+    "Washing machine": data["Washing machine"],
+    "Water heater": data["Water heater"],
+  };
+
+  const filterAmenities = Object.keys(amenities).filter(
+    (a) => amenities[a] == "TRUE"
+  );
+
+  const amenitiesElement = (amenities) =>
+    amenities.map((a) => <span className="block">{a}</span>);
+
   return (
     <tr className="border-b text-sm">
       <td className={validateRowClass(data)}>
@@ -154,6 +174,7 @@ function TableItem({ data }) {
       </td>
       <td>
         <select
+          className="cursor-pointer"
           value={benefitSelected}
           onChange={(event) => {
             setBenefit(event.target.value);
@@ -162,7 +183,19 @@ function TableItem({ data }) {
           {optionBenefits(BENEFITS)}
         </select>
       </td>
-      <td className="text-red-500">Amenities</td>
+      <td className="amenities relative">
+        <span className="block text-center cursor-pointer">
+          {filterAmenities.length ? filterAmenities.length : "-"}
+        </span>
+        <div className="show-amenities text-xs w-32 hidden">
+          <span className="block text-center font-bold border-blue-400 border-b-2 py-2">
+            Amenities
+          </span>
+          <div className="px-2 py-2">
+            {filterAmenities.length ? amenitiesElement(filterAmenities) : "No amenities"}
+          </div>
+        </div>
+      </td>
     </tr>
   );
 }
@@ -171,7 +204,7 @@ function TableList({ data }) {
   const items = data.map((d) => <TableItem key={d.id} data={d} />);
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto pb-24">
       <table className="w-full text-left">
         <TableHeader />
         <tbody>{items}</tbody>
