@@ -51,7 +51,7 @@ function TableItem({ data }) {
     !!d["title"] &&
     !!d["description"]
       ? "text-center text-gray-500"
-      : "bg-red-500 text-white rounded";
+      : "btn-remove";
 
   const validateString = (str) =>
     !!str ? str : <span className="text-red-500">not found</span>;
@@ -90,7 +90,9 @@ function TableItem({ data }) {
 
   return (
     <tr className="border-b text-sm">
-      <td className={validateRowClass(data)}>{validateString(data["id"])}</td>
+      <td className={validateRowClass(data)}>
+        <span>{validateString(data["id"])}</span>
+      </td>
       <td className="ellipsis" style={{ maxWidth: "18rem" }}>
         {validateString(data["condo_name-EN"])}
       </td>

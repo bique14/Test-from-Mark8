@@ -24,7 +24,8 @@ th {
   font-weight: 400;
 }
 
-th, td {
+th,
+td {
   padding: 1rem;
 }
 
@@ -32,4 +33,19 @@ th, td {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.btn-remove {
+  color: white;
+  background-color: #f56565;
+  border-radius: 0.25rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+.btn-remove:hover span {
+  display: none;
+}
+.btn-remove:hover:before {
+  content: "X";
 }
